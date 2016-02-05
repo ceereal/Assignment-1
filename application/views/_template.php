@@ -3,21 +3,23 @@
 	<head>
 		<title>{title}</title>
 		<meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="stylesheet" type="text/css" href="-------"/>  //enter stylesheet location 
+		<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+
 	</head>
 	<body>
 		<div class="navbar">
-			<div class="leftNav">
-				<h1>{title}</h1> 
-			</div>           
-			<div class="midNav"> 
-				{options} // changing options - justify content 
-			</div>
-			<div class="rightNav">
-				{signOptions} //user or login 
-			</div>
+			<span class="leftNav">
+				{title}
+			</span>           
+			<span class="midNav"> 
+				{options}
+			</span>
+			<span class="rightNav">
+				{signOptions}
+			</span>
 
 		</div>
+		
 		<div id="body">
                 {content}
 		</div>
