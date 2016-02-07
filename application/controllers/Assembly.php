@@ -13,17 +13,25 @@ class Assembly extends Application {
 	{
 		//uncommenting these lines makes it seem like you are logged in,
 		//to see what it looks like 
-		$_SESSION['loggedIn'] = 'true';
-		$_SESSION['username'] = 'dave';
+		$_SESSION['loggedIn'] = true;
+		$_SESSION['username'] = 'Mickey';
 		
 		
 		
 		$this->data['pagebody'] = 'assembly'; //setting view to use
 		$this->data['title'] = 'Bot Assembler'; //Changing nav bar to show page title
+		if($_SESSION['loggedIn']){
 		//setting appropriate data that
-		$this->data['inventory_table'] = "<b>Test</b>";
+		$table = "";
+		$collection = $this->collections->collection_by_player($_SESSION['username']);
+		
+		foreach($collection as $row){
+			$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Piece'] . " with token " . $row['Token'] . " from the time of " . $row['DateTime'] . "</div>";
+		}
+		
+		$this->data['inventory_table'] = $table;
 		$this->Render();
-
+		}
 	}
 }
 
