@@ -35,15 +35,18 @@ class Welcome extends Application {
 		}
 	}
 	
+	//Find equity of all players
+	//If they have a collection -> add value of collection to equity
+	//If they don't have a collection -> add +1 peanut for each card
 	public function findCardSet()
 	{
 		$allCards = $this->collections->all();
 		
 		foreach($allCards as $card) {
-			$Piece = preg_match('/([0-9]){2}/', $card['Piece']);
-			$subPiece = preg_match('/[a-z]/', $card['Piece']);
-			$cardPosition = preg_match('/\d{1}$/', $card['Piece']);
-			var_dump($subPiece);
+			$Piece = substr($card['Piece'], 0, 2);
+			$subPiece = substr($card['Piece'], 2, 1);
+			$cardPosition = substr($card['Piece'], 4, 1);
+			echo($Piece." ".$subPiece." ".$cardPosition."<br>");
 		}
 		$allCards[0];
 	}
