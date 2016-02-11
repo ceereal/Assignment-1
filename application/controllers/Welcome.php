@@ -43,13 +43,29 @@ class Welcome extends Application {
 	//subtract #sets * 3 from total, add that to #	peanuts. Done!
 	public function findCardSet(){
 		$allCards = $this->collections->all();
-		
+		/*
 		foreach($allCards as $card){
 			$players = $this->collections->get_players();
 			foreach($players as $player){
 				$sets = $this->collections->get_set_by_player_piece_subpiece($player['Player'], $card['Piece'], $card['SubPiece']);
-				echo '<pre> ' . $player['Player'] . ' ' . var_export($sets, true) . '</pre>';
+				foreach($sets as $set){
+					echo '<pre> ' . $player['Player'] . ' ' . var_export($set, true) . '</pre>';
+				}
+				
 			}
+		}*/
+		
+		$players = $this->collections->get_players();
+		
+		foreach($players as $player){
+			//echo $player['Player'];
+			$playerCards = $this->collections->collection_by_player($player['Player']);
+				echo '<pre> ' . var_export($playerCards, true) . '</pre>';
+			
+			
+			
+			
+			
 		}
 	}
 	
