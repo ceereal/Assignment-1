@@ -57,4 +57,9 @@ class Collections extends CI_Model {
 		$query = $this->db->query("SELECT distinct(Player) FROM collections;");
 		return $query->result_array();
 	}
+	
+	function get_distinct_sets(){
+		$query = $this->db->query("SELECT DISTINCT(LEFT(Piece, 3)) AS SetID, LEFT(Piece, 2) AS Piece, SUBSTRING(Piece, 3, 1) AS SubPiece FROM collections ORDER BY Piece, SubPiece;");
+		return $query->result_array();
+	}
 }

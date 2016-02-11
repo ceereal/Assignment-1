@@ -60,12 +60,17 @@ class Welcome extends Application {
 		foreach($players as $player){
 			//echo $player['Player'];
 			$playerCards = $this->collections->collection_by_player($player['Player']);
-				echo '<pre> ' . var_export($playerCards, true) . '</pre>';
+			$distinctSets = $this->collections->get_distinct_sets();
+			foreach($distinctSets as $set){
+				$playerSets = $this->collections->get_set_by_player_piece_subpiece($player['Player'], $set['Piece'], $set['SubPiece']);
+				echo '<pre> ' . var_export($playerSets, true) . '</pre>';
+			}
 			
 			
 			
 			
 			
+			break;
 		}
 	}
 	
