@@ -38,17 +38,19 @@ class Welcome extends Application {
 	//Find equity of all players
 	//If they have a collection -> add value of collection to equity
 	//If they don't have a collection -> add +1 peanut for each card
-	public function findCardSet()
-	{
+	//To calc peanuts, call this, find how many of A, B, and C you have,
+	//(IE 3 top, 2 bottom, 4 middle = 2 complete sets), multiply by 50, 
+	//subtract #sets * 3 from total, add that to #	peanuts. Done!
+	public function findCardSet(){
 		$allCards = $this->collections->all();
 		
-		foreach($allCards as $card) {
-			$Piece = substr($card['Piece'], 0, 2);
-			$subPiece = substr($card['Piece'], 2, 1);
-			$cardPosition = substr($card['Piece'], 4, 1);
-			echo($Piece." ".$subPiece." ".$cardPosition."<br>");
+		foreach($allCards as $card){
+			$players = $this->collections->get_players();
+			foreach($players as $player){
+				$sets = $this->collections->get_set_by_player_piece_subpiece($player['Player'], $card['Piece'], $card['SubPiece']);
+				echo '<pre> ' . $player['Player'] . ' ' . var_export($sets, true) . '</pre>';
+			}
 		}
-		$allCards[0];
 	}
 	
 	
