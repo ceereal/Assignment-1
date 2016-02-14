@@ -7,7 +7,7 @@
 
 	</head>
 	<body>
-		<div class="navbar">
+		<div id="navbar">
 			<span class="leftNav">
 				{title}
 			</span>           

@@ -39,13 +39,13 @@ class Application extends CI_Controller {
 
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
-				$this->data['options'] = "<a href='/'>Home</a><a href='/portfolio/" . $_SESSION['username'] . " '>Portfolio</a><a href='/assembly'>Assembler</a>";
-				$this->data['signOptions'] = "Hello " . $_SESSION['username'];
+				$this->data['options'] = "<ul> <li> <a href='/'>Home</a></li> <li><a href='/portfolio/" . $_SESSION['username'] . " '>Portfolio</a></li> <li><a href='/assembly'>Assembler</a></li> </ul>";
+				$this->data['signOptions'] = "Welcome, " . $_SESSION['username'] . "!";
 			}
 		}
 		
 		else{
-			$this->data['options'] = "<a href='google.ca'>Home</a>";
+			$this->data['options'] = "<ul> <li><a href='/'>Home</a></li></ul>";
 			$this->data['signOptions'] = "<input type='text'><input type='button' value='Sign In'>";
 		}
 		
