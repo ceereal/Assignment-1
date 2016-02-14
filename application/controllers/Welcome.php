@@ -16,20 +16,24 @@ class Welcome extends Application {
 		$_SESSION['loggedIn'] = true;
 		$_SESSION['username'] = 'Mickey';
 		
+		$gameStatus = '<h1>Game is <b>ACTIVE!</b></h1>';
 		
-		
-		$this->data['pagebody'] = 'welcome_message'; //setting view to use
+		$this->data['pagebody'] = 'Welcome'; //setting view to use
 		$this->data['title'] = 'Bot Assembler'; //Changing nav bar to show page title
 		if($_SESSION['loggedIn']){
-			//setting appropriate data that
 			$table = "";
-			$collection = $this->collections->collection_by_player($_SESSION['username']);
+			//$collection = $this->collections->collection_by_player($_SESSION['username']);
 			
-			foreach($collection as $row){
-				$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
+			$players = $this->collections->get_players();
+			
+			foreach($players as $player) {
+				$equity = $this->collections->get_player_equity($player['Player']);
+				$table .= "<div>Player " . $player['Player'] . " has equity of " . $equity . "</div>";
 			}
 			
-			$this->data['inventory_table'] = $table;
+		
+			$this->data['GameStatus'] = $gameStatus;
+			$this->data['EquityTable'] = $table;
 			$this->Render();
 			//$this->findCardSet();
 		}

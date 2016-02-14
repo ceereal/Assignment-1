@@ -35,6 +35,12 @@ class Collections extends CI_Model {
 		return $query->result_array();
 	}
 	
+	function get_player_equity($playerName){
+		$query = $this->db->query("SELECT COUNT(*) AS Equity FROM collections WHERE player = '$playerName'");
+		$value = $query->result_array();
+		return $value[0]['Equity'];
+	}
+	
 	
 	function get_players(){
 		$query = $this->db->query("SELECT distinct(Player) FROM collections;");
