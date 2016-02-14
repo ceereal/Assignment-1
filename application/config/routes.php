@@ -49,8 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+// REMOVE THIS WHEN SESSION IS PROPERLY IMPLEMENTED
+$_SESSION['username'] = 'Mickey'; //TEST VARIABLE
+//REMOVE THIS WHEN SESSION IS PROPERLY IMPLEMENTED
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['portfolio/(:any)'] = 'Portfolio/index/$1';
-$route['portfolio'] = 'Welcome/index';
+$route['portfolio'] = 'Portfolio/index/' . $_SESSION['username'];
