@@ -31,13 +31,13 @@ class Portfolio extends Application {
                 if ($collection != null) {
 		
                     foreach($collection as $row){
-                            $table1 .= "<div>Player " . $row['Player'] . " has piece " . $row['Piece'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
-                    }
+						$table1 .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
+					}
 
                     $this->data['inventory_table'] = $table1;
                     
                     foreach($transaction as $row){
-			$table2 .= '<div>Player ' . $row['Player'] . ' has ' . $row['Trans'] . ' series ' . $row['Series'] . ' on ' . $row['DateTime'] . '<br></div>';
+						$table2 .= '<div>Player ' . $row['Player'] . ' has ' . $row['Trans'] . ' series ' . $row['Series'] . ' on ' . $row['DateTime'] . '<br></div>';
                     }
                     
                     $this->data['activity_feed'] = $table2;

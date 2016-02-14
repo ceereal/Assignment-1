@@ -26,7 +26,7 @@ class Assembly extends Application {
 		$collection = $this->collections->collection_by_player($_SESSION['username']);
 		
 		foreach($collection as $row){
-			$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Piece'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
+			$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
 		}
 		
 		$this->data['inventory_table'] = $table;
