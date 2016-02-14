@@ -34,13 +34,13 @@ class Portfolio extends Application {
 						$table1 .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
 					}
 
-                    $this->data['inventory_table'] = $table1;
+                    $this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table1;
                     
                     foreach($transaction as $row){
 						$table2 .= '<div>Player ' . $row['Player'] . ' has ' . $row['Trans'] . ' series ' . $row['Series'] . ' on ' . $row['DateTime'] . '<br></div>';
                     }
                     
-                    $this->data['activity_feed'] = $table2;
+                    $this->data['activity_feed'] = '<h3>Activity Feed: </h3>' . $table2;
                     
                     $this->Render();
                 } else {

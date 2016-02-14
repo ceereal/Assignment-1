@@ -19,7 +19,7 @@ class Welcome extends Application {
 		$gameStatus = '<h1>Game is <b>ACTIVE!</b></h1>';
 		
 		$this->data['pagebody'] = 'Welcome'; //setting view to use
-		$this->data['title'] = 'Bot Assembler'; //Changing nav bar to show page title
+		$this->data['title'] = 'Bot Card Collector'; //Changing nav bar to show page title
 		if($_SESSION['loggedIn']){
 			$table = "";
 			//$collection = $this->collections->collection_by_player($_SESSION['username']);
@@ -32,8 +32,8 @@ class Welcome extends Application {
 			}
 			
 		
-			$this->data['GameStatus'] = $gameStatus;
-			$this->data['EquityTable'] = $table;
+			$this->data['GameStatus'] = '<h3>Game Status: </h3>' . $gameStatus;
+			$this->data['EquityTable'] = '<h3>Players: </h3>' . $table;
 			$this->Render();
 			//$this->findCardSet();
 		}

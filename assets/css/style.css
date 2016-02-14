@@ -1,6 +1,11 @@
 body {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     background-color: #999;
+    color: #fff;
+}
+h3 {
+    color: #8EF4EF;
+    
 }
 /* -------------- Start of Nav Bar -------------- */
 #navbar {
@@ -9,15 +14,18 @@ body {
     top:0;
     left:0;
     height: 80px;
-    margin: 0;
+    margin: 0 auto;
     padding:0;
     background: #333;
+    max-width: 1600px;
+    max-height:100px;
+
 }   
 
 .midNav ul {
     list-style-type: none;
     text-align: center;
-    overflow:hidden;
+    /*overflow:hidden;*/
 }
 
 .midNav li {
@@ -48,7 +56,27 @@ body {
 
 /* -------------- End of Nav Bar -------------- */
 
-/* -------------- Start of Body -------------- */
+/* -------------- Start of Content -------------- */
 #body{
-    margin: 20px auto 0px;
+    margin: 18px auto 0px;
+    max-width: 1500px;
+    overflow: hidden;
 }
+
+#playerInventory, #GameStatus {
+    float:left;
+    margin-left: 5%;
+    width:50%;
+    padding: 14px 15px;
+    background-color: #555;
+}
+
+#ActivityFeed, #assembler_area, #EquityTable {
+    float:left;
+    margin-left:5%;
+    width:30%;
+    padding: 14px 15px;
+    background-color: #555;
+}
+
+/* -------------- End of Content -------------- */

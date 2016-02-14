@@ -29,7 +29,7 @@ class Assembly extends Application {
 			$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
 		}
 		
-		$this->data['inventory_table'] = $table;
+		$this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table;
 		$this->Render();
 		}
 	}
