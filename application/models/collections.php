@@ -11,9 +11,9 @@ class Collections extends CI_Model {
 	//Returns all collected robots in descending order by post date
 	// Where clause removes header row
 	function all(){
-		$query = $this->db->query(" SELECT LEFT(Piece, 2) AS Piece,
-									SUBSTRING(Piece, 3, 1) AS SubPiece,
-									SUBSTRING(Piece, 5, 1) AS CardPosition,
+		$query = $this->db->query(" SELECT Series,
+									SUBSERIES,
+									CardPosition,
 									Player,
 									Token,
 									Datetime
@@ -24,9 +24,9 @@ class Collections extends CI_Model {
 	
 	//returns all collected robots for a single player ordered by date, descending (most recent to least)
 	function collection_by_player($playerName){
-		$query = $this->db->query(" SELECT LEFT(Piece, 2) AS Piece,
-									SUBSTRING(Piece, 3, 1) AS SubPiece,
-									SUBSTRING(Piece, 5, 1) AS CardPosition,
+		$query = $this->db->query(" SELECT Series,
+									SubSeries,
+									CardPosition,
 									Player,
 									Token,
 									Datetime
@@ -35,31 +35,15 @@ class Collections extends CI_Model {
 		return $query->result_array();
 	}
 	
-	
-	//To calc peanuts, call this, find how many of A, B, and C you have,
-	//(IE 3 top, 2 bottom, 4 middle = 2 complete sets), multiply by 50, 
-	//subtract #sets * 3 from total, add that to #	peanuts. Done!
-	function get_set_by_player_piece_subpiece($playerName, $piece, $subpiece){
-		
-		$query = $this->db->query(" SELECT LEFT(Piece, 2) AS Piece, 
-								    SUBSTRING(Piece, 3, 1) AS SubPiece, 
-								    SUBSTRING(Piece, 5, 1) AS CardPosition,
-								    Token 
-								    FROM collections 
-								    WHERE Player = '$playerName' 
-								    AND Piece = $piece 
-								    AND SUBSTRING(Piece, 3, 1) = '$subpiece'; 
-									");
-		return $query->result_array();
+	function get_player_equity($playerName){
+		$query = $this->db->query("SELECT COUNT(*) AS Equity FROM collections WHERE player = '$playerName'");
+		$value = $query->result_array();
+		return $value[0]['Equity'];
 	}
+	
 	
 	function get_players(){
 		$query = $this->db->query("SELECT distinct(Player) FROM collections;");
-		return $query->result_array();
-	}
-	
-	function get_distinct_sets(){
-		$query = $this->db->query("SELECT DISTINCT(LEFT(Piece, 3)) AS SetID, LEFT(Piece, 2) AS Piece, SUBSTRING(Piece, 3, 1) AS SubPiece FROM collections ORDER BY Piece, SubPiece;");
 		return $query->result_array();
 	}
 }
