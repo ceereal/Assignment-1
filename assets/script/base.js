@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-  $("#body").on("click", ".botpiece", function(){
+  $("#assemblerInventory").on("click", ".botpiece", function(){
         var token = $(this).attr("data-token");
         console.log(token);
         $.ajax({
@@ -31,11 +31,12 @@ $(document).ready(function(){
           }
         });
     });
-    $("#body").on("click", ".assemblerPiece", function(){
+
+    $("#assemblerInventory").on("click", ".assemblerPiece", function(){
       $(this).children("img").attr("src", "/assets/images/unknown.jpeg");
     });
 
-    $("#body").on("click", "#assembleButton", function(){
+    $("#assemblerArea").on("click", "#assembleButton", function(){
       $("#assemblerArea").children("div").children("img").attr("src", "/assets/images/unknown.jpeg");
       alert('Not implemented yet!');
     });
@@ -74,7 +75,12 @@ $(document).ready(function(){
        }
 
       });
-
-
     });
+
+
+    $("#body").on("change", "#selectPortfolio", function(){
+      var selectedUser = $(this).children(":selected").val();
+      window.location.href="/portfolio/" + selectedUser;
+    });
+
 });

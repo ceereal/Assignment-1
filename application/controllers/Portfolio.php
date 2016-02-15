@@ -54,14 +54,22 @@ class Portfolio extends Application {
 
                     $this->data['activity_feed'] = '<h3>Activity Feed: </h3>' . $table2;
 
-                    $this->Render();
+
                 } else {
                     $string = ('This person does not exist within the game.');
                     $this->data['inventory_table'] = $string;
                     $this->data['activity_feed'] = null;
-                    $this->Render();
-                }
 
+                }
+			$allPlayers = $this->players->all();
+			$otherPlayers = "<h3>Other Players</h3><select id='selectPortfolio'>";
+			foreach ($allPlayers as $row){
+				$otherPlayers .= "<option value='". $row['Player'] ."'>". $row['Player'] . "</option>";
+			}
+			$otherPlayers .= "</select>";
+			$this->data['other_players'] = $otherPlayers;
+
+			$this->Render();
 	}
 
 }

@@ -13,6 +13,11 @@ class Welcome extends Application {
 	{
 
 		$gameStatus = '<h1>Game is <b>ACTIVE!</b></h1>';
+		$series = $this->series->all();
+		$seriesCollection = "<h3>Known Series: </h3>";
+		foreach($series as $row){
+			$seriesCollection .= "<div>Series " . $row['Series'] . ": " . $row['Description'] . ", with a value of " . $row['Value'] ." peanuts</div>";
+		}
 
 		$this->data['pagebody'] = 'Welcome'; //setting view to use
 		$this->data['title'] = 'Bot Card Collector'; //Changing nav bar to show page title
@@ -30,6 +35,7 @@ class Welcome extends Application {
 
 
 			$this->data['GameStatus'] = '<h3>Game Status: </h3>' . $gameStatus;
+			$this->data['Series'] = $seriesCollection;
 			$this->data['EquityTable'] = '<h3>Players: </h3>' . $table;
 			$this->Render();
 			//$this->findCardSet();

@@ -1,4 +1,4 @@
-<div id="playerInventory">
+<div class="playerInventory" id="assemblerInventory">
 	{inventory_table}
 </div>
 
