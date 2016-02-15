@@ -50,12 +50,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-// REMOVE THIS WHEN SESSION IS PROPERLY IMPLEMENTED
-$_SESSION['username'] = 'Mickey'; //TEST VARIABLE
-//REMOVE THIS WHEN SESSION IS PROPERLY IMPLEMENTED
+
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['portfolio/(:any)'] = 'Portfolio/index/$1';
-$route['portfolio'] = 'Portfolio/index/' . $_SESSION['username'];
+if(ISSET($_SESSION['username'])){
+  $route['portfolio'] = 'Portfolio/index/' . $_SESSION['username'];
+}
+$route['get_collection_by_token'] = 'Assembly/get_collection_by_token/';
+$route['login'] = 'Welcome/login/';
+$route['logout'] = 'Welcome/logout/';

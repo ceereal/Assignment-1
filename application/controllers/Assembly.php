@@ -7,57 +7,69 @@ class Assembly extends Application {
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 
 	public function index()
 	{
-		//uncommenting these lines makes it seem like you are logged in,
-		//to see what it looks like 
-		$_SESSION['loggedIn'] = true;
-		$_SESSION['username'] = 'Mickey';
-		
-		
-		
+		session_start();
 		$this->data['pagebody'] = 'assembly'; //setting view to use
 		$this->data['title'] = 'Bot Assembler'; //Changing nav bar to show page title
-		if($_SESSION['loggedIn']){
-		//setting appropriate data that
-		$table = "";
-		$collection = $this->collections->collection_by_player($_SESSION['username']);
-		
-		foreach($collection as $row){
-			$table .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
+
+		if(ISSET($_SESSION['loggedIn'])){
+				if($_SESSION['loggedIn'] == true){
+				//setting appropriate data that
+				$table = "";
+				$collection = $this->collections->collection_by_player($_SESSION['username']);
+
+				foreach($collection as $row){
+					$currentRow = "<div class='botpiece' data-token='" . $row['Token'] . "'>" .
+												"<img src='/assets/images/" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . ".jpeg' alt='Bot piece'>" .
+												"<div class='botsubtitle'>" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . "</div>" .
+												"</div>";
+					$table .= $currentRow;
+				}
+
+				$this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table;
+				$this->data['headPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
+				$this->data['midPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
+				$this->data['legPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
+
+				$this->Render();
+			}
+			else{
+				redirect('/');
+			}
 		}
-		
-		$this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table;
-		$this->Render();
+		else{
+			redirect('/');
 		}
+		session_write_close();
 	}
+
+	public function select($pieceToken){
+		//check that the current signed in player owns that Token
+		//put that token in the place of the image box
+
+		$currentPiece = $this->collections->collection_by_token($pieceToken);
+		if($currentPiece['Player'] == $_SESSION['username']){
+			$this->data['headPiece'] = "<img src=<img class='botpiece' src='/assets/images/" . $currentPiece['Series'] . $currentPiece['SubSeries'] . "-" . $currentPiece['CardPosition'] . ".jpeg alt='Unkown!'>";
+		}
+
+	}
+
+	public function get_collection_by_token(){
+		session_start();
+		$pieceToken = $this->input->post('token', TRUE);
+		$currentPiece = $this->collections->collection_by_token($pieceToken);
+		if($currentPiece['Player'] == $_SESSION['username']){
+			$currentPiece['message'] = 'success';
+			echo json_encode($currentPiece, JSON_FORCE_OBJECT);
+		}
+		else{
+			$error['message'] = "failure";
+			echo json_encode($error, JSON_FORCE_OBJECT);
+		}
+
+	}
+
 }
-
-/*
-	Array stuff for myself, to think about
-
-
-	//gets a list of arrays, then goes through each array
-	//array looks like {filename => 'whatever.png', "title" => bla}
-	//parses them (puts the variables where they belong)
-	//then passes the cells to the generate columns thing
-	
-	
-	foreach ($pix as $picture)
-		$cells[] = $this->parser->parse('_cell', (array) $picture, true);
-	
-	//prime the table class
-	$this->load->library('table');
-	$parms = array(
-		'table_open' => '<table class="gallery">',
-		'cell_start' => '<td class="oneimage">',
-		'cell_alt_start' => '<td class="oneimages">'
-	);
-	$this->table->set_template($parms);
-	
-	//generate table
-	$rows = $this->table->make_columns($cells, 3);
-	$this->data['thetable'] = $this->table->generate($rows);
-	*/
