@@ -11,9 +11,6 @@ class Portfolio extends Application {
 
 	public function index($name)
 	{
-            //code igniter url
-            //fetch the pathname, explode it, use the name value at the end
-
 
 		$this->data['pagebody'] = 'portfolio'; //setting view to use
 		$this->data['title'] = 'Portfolio'; //Changing nav bar to show page title

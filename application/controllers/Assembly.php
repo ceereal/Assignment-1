@@ -11,16 +11,19 @@ class Assembly extends Application {
 
 	public function index()
 	{
+		//Starts session
 		session_start();
 		$this->data['pagebody'] = 'assembly'; //setting view to use
 		$this->data['title'] = 'Bot Assembler'; //Changing nav bar to show page title
 
+		//Redirects if the session is not started or if the loggedin variable is set to false
 		if(ISSET($_SESSION['loggedIn'])){
 				if($_SESSION['loggedIn'] == true){
-				//setting appropriate data that
+
+				//prints out all the collected cards a player has using CSS to format it
+				//as a table
 				$table = "";
 				$collection = $this->collections->collection_by_player($_SESSION['username']);
-
 				foreach($collection as $row){
 					$currentRow = "<div class='botpiece' data-token='" . $row['Token'] . "'>" .
 												"<img src='/assets/images/" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . ".jpeg' alt='Bot piece'>" .
@@ -29,11 +32,8 @@ class Assembly extends Application {
 					$table .= $currentRow;
 				}
 
+				//Setting placeholder values to the created list
 				$this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table;
-				$this->data['headPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
-				$this->data['midPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
-				$this->data['legPiece'] = "<img src='/assets/images/unknown.jpeg' alt='Unkown!'>";
-
 				$this->Render();
 			}
 			else{
@@ -46,21 +46,14 @@ class Assembly extends Application {
 		session_write_close();
 	}
 
-	public function select($pieceToken){
-		//check that the current signed in player owns that Token
-		//put that token in the place of the image box
-
-		$currentPiece = $this->collections->collection_by_token($pieceToken);
-		if($currentPiece['Player'] == $_SESSION['username']){
-			$this->data['headPiece'] = "<img src=<img class='botpiece' src='/assets/images/" . $currentPiece['Series'] . $currentPiece['SubSeries'] . "-" . $currentPiece['CardPosition'] . ".jpeg alt='Unkown!'>";
-		}
-
-	}
-
+	//function that is used by an ajax call (redirected in routes.php) to
+	//use the collections model to get a single card via it's token
+	//Only returns the row if the card belongs to the user signed in
 	public function get_collection_by_token(){
 		session_start();
 		$pieceToken = $this->input->post('token', TRUE);
 		$currentPiece = $this->collections->collection_by_token($pieceToken);
+
 		if($currentPiece['Player'] == $_SESSION['username']){
 			$currentPiece['message'] = 'success';
 			echo json_encode($currentPiece, JSON_FORCE_OBJECT);

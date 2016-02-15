@@ -5,15 +5,15 @@
 <div id="assemblerArea">
 	<h3>Assembly Area:</h3>
 	<div class="assemblerPiece" id="headPiece">
-		{headPiece}
+		<img src='/assets/images/unknown.jpeg' alt='Unkown!'>
 	</div>
 
 	<div class="assemblerPiece" id="midPiece">
-		{midPiece}
+		<img src='/assets/images/unknown.jpeg' alt='Unkown!'>
 	</div>
 
 	<div class="assemblerPiece" id="legPiece">
-		{legPiece}
+		 <img src='/assets/images/unknown.jpeg' alt='Unkown!'>
 	</div>
 
 	<div id="assembleButton">

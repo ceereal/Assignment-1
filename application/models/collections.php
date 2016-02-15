@@ -35,27 +35,25 @@ class Collections extends CI_Model {
 		return $query->result_array();
 	}
 
+	//returns a count of the players cards
 	function get_player_equity($playerName){
 		$query = $this->db->query("SELECT COUNT(*) AS Equity FROM collections WHERE player = '$playerName'");
 		$value = $query->result_array();
 		return $value[0]['Equity'];
 	}
 
-
+	//returns all distinct players in the collections table
 	function get_players(){
 		$query = $this->db->query("SELECT distinct(Player) FROM collections;");
 		return $query->result_array();
 	}
 
+	//returns a single card based on it's token
 	function collection_by_token($token){
 		$query = $this->db->query("SELECT * FROM collections WHERE Token = '$token';");
 		return $query->row_array();
 	}
-	
-	function get_player_peanuts($playerName){
-		$query = $this->db->query("SELECT * FROM players WHERE Player = '$playerName';");
-		$value = $query->result_array();
-		return $value[0]['Peanuts'];
-	}
+
+
 
 }
