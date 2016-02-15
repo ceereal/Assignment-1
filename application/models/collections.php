@@ -51,5 +51,11 @@ class Collections extends CI_Model {
 		$query = $this->db->query("SELECT * FROM collections WHERE Token = '$token';");
 		return $query->row_array();
 	}
+	
+	function get_player_peanuts($playerName){
+		$query = $this->db->query("SELECT * FROM players WHERE Player = '$playerName';");
+		$value = $query->result_array();
+		return $value[0]['Peanuts'];
+	}
 
 }
