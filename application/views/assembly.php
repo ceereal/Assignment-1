@@ -2,19 +2,21 @@
 	{inventory_table}
 </div>
 
-<div id="assembler_area">
-	<div id="headPiece">
-	
+<div id="assemblerArea">
+	<h3>Assembly Area:</h3>
+	<div class="assemblerPiece" id="headPiece">
+		{headPiece}
 	</div>
-	
-	<div id="midPiece">
-	
+
+	<div class="assemblerPiece" id="midPiece">
+		{midPiece}
 	</div>
-	
-	<div id="bottomPiece">
-	
+
+	<div class="assemblerPiece" id="legPiece">
+		{legPiece}
 	</div>
-	
+
+	<div id="assembleButton">
+		<input type="button" value="ASSEMBLE!">
+	</div>
 </div>
-
-

@@ -7,41 +7,53 @@ class Portfolio extends Application {
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 
 	public function index($name)
 	{
             //code igniter url
             //fetch the pathname, explode it, use the name value at the end
-            
-		//uncommenting these lines makes it seem like you are logged in,
-		//to see what it looks like 
-		$_SESSION['loggedIn'] = true;
-		$_SESSION['username'] = 'Mickey';
-		
+
+
 		$this->data['pagebody'] = 'portfolio'; //setting view to use
 		$this->data['title'] = 'Portfolio'; //Changing nav bar to show page title
 
 		$table1 = "";
 		$collection = $this->collections->collection_by_player($name);
-                
+
                 $table2 = "";
                 $transaction =  $this->transactions->transactions_by_player($name);
-                
+
                 if ($collection != null) {
-		
+
                     foreach($collection as $row){
-						$table1 .= "<div>Player " . $row['Player'] . " has piece " . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . " with token " . $row['Token'] . " from the time of " . $row['Datetime'] . "</div>";
+											$currentRow = "<div class='botpiece'>" .
+																		"<img src='/assets/images/" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . ".jpeg' alt='Bot piece'>" .
+																		"<div class='botsubtitle'>" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . "</div>" .
+																		"</div>";
+
+
+											$table1 .= $currentRow;
 					}
 
                     $this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table1;
-                    
+
                     foreach($transaction as $row){
-						$table2 .= '<div>Player ' . $row['Player'] . ' has ' . $row['Trans'] . ' series ' . $row['Series'] . ' on ' . $row['DateTime'] . '<br></div>';
+									  	switch ($row['Trans']){
+												case "sell":
+													$currentVerb = "sold";
+													break;
+												case "buy":
+													$currentVerb = "bought";
+													break;
+												default:
+													$currentVerb = "DEFAULT";
+											}
+						$table2 .= '<div>' . $row['Player'] . ' ' . $currentVerb . ' a series ' . $row['Series'] . ' at ' . $row['DateTime'] . '<br></div>';
                     }
-                    
+
                     $this->data['activity_feed'] = '<h3>Activity Feed: </h3>' . $table2;
-                    
+
                     $this->Render();
                 } else {
                     $string = ('This person does not exist within the game.');
@@ -49,6 +61,7 @@ class Portfolio extends Application {
                     $this->data['activity_feed'] = null;
                     $this->Render();
                 }
+
 	}
 
 }

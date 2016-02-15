@@ -32,39 +32,56 @@ class Application extends CI_Controller {
 	function render()
 	{
 		$this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
-		
-		//Enable these lines to test what it looks like when the user session variables are set (eg: user is signed in)
-		//$_SESSION['loggedIn'] = 'true';
-		//$_SESSION['username'] = 'dave';
+
+		if(session_id() == '') {
+		    session_start();
+		}
 
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				$this->data['options'] = "<ul> <li> <a href='/'>Home</a></li> <li><a href='/portfolio/" . $_SESSION['username'] . " '>Portfolio</a></li> <li><a href='/assembly'>Assembler</a></li> </ul>";
-				$this->data['signOptions'] = "Welcome, " . $_SESSION['username'] . "!";
+				$this->data['signOptions'] = "Welcome, " . $_SESSION['username'] . "!<input id='btnLogout' type='button' value='Log Out'>";
+			}
+			else{
+				$this->data['options'] = "<ul> <li><a href='/'>Home</a></li></ul>";
+				$this->data['signOptions'] = "<input type='text'><input id='btnLogin' type='button' value='Log In'>";
 			}
 		}
-		
+
 		else{
 			$this->data['options'] = "<ul> <li><a href='/'>Home</a></li></ul>";
-			$this->data['signOptions'] = "<input type='text'><input type='button' value='Sign In'>";
+			$this->data['signOptions'] = "<input id='txtSignIn' type='text'> <input id='btnLogin' type='button' value='Log In'>";
 		}
-		
 		// finally, build the browser page!
 		$this->data['data'] = &$this->data;
 		$this->parser->parse('_template', $this->data);
+
+	}
+
+
+	public function login(){
+		$username = $this->input->post('username', TRUE);
+		if(!empty($username)){
+			session_start();
+				$_SESSION['loggedIn'] = true;
+				$_SESSION['username'] = $username;
+				echo 1;
+		}
+
+	}
+
+	public function logout(){
+		session_start();
+		if($_SESSION['loggedIn'] == true){
+				$_SESSION['loggedIn'] = false;
+				unset($_SESSION['username']);
+			session_write_close();
+			echo 1;
+		}
+
 	}
 }
 
-/*
-session_start();
-		if(isset($_SESSION['loggedIn'])){
-			$return = $_SESSION['loggedIn'];
-		}
-		else{
-			$return = false;
-		}
-	session_write_close();
-*/
 
 /* End of file MY_Controller.php */
 /* Location: application/core/MY_Controller.php */
