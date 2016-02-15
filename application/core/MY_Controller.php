@@ -31,12 +31,15 @@ class Application extends CI_Controller {
 	 */
 	function render()
 	{
+
 		$this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
+		//Starts the session if it hasn't already been started
 		if(session_id() == '') {
 		    session_start();
 		}
 
+		//handles if the user is signed in or not, for just the nav bar (same across all pages)
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				$this->data['options'] = "<ul> <li> <a href='/'>Home</a></li> <li><a href='/portfolio/" . $_SESSION['username'] . " '>Portfolio</a></li> <li><a href='/assembly'>Assembler</a></li> </ul>";
@@ -52,13 +55,14 @@ class Application extends CI_Controller {
 			$this->data['options'] = "<ul> <li><a href='/'>Home</a></li></ul>";
 			$this->data['signOptions'] = "<input id='txtSignIn' type='text'> <input id='btnLogin' type='button' value='Log In'>";
 		}
-		// finally, build the browser page!
+
+		// builds the rest of the page
 		$this->data['data'] = &$this->data;
 		$this->parser->parse('_template', $this->data);
 
 	}
 
-
+	//Logging in function, starts the session handler and sets username and loggedin
 	public function login(){
 		$username = $this->input->post('username', TRUE);
 		if(!empty($username)){
@@ -70,6 +74,8 @@ class Application extends CI_Controller {
 
 	}
 
+	//Logging out function, unsets the username, sets loggedin to false
+	//and closes the session handler
 	public function logout(){
 		session_start();
 		if($_SESSION['loggedIn'] == true){

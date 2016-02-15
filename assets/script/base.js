@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
+  //Delegating event handlers for various clicks
 
+  //Delegation for assembling
+
+  //Checks that the selected piece belongs to the signed in user,
+  //Then puts in into the assembler
+  //Ideally would also store the token as an attribute for later verification (for next assignment)
   $("#assemblerInventory").on("click", ".botpiece", function(){
         var token = $(this).attr("data-token");
         console.log(token);
@@ -32,15 +38,20 @@ $(document).ready(function(){
         });
     });
 
+    //Removes bot pieces on clicking one in the assembler
     $("#assemblerInventory").on("click", ".assemblerPiece", function(){
       $(this).children("img").attr("src", "/assets/images/unknown.jpeg");
     });
 
+    //resets the assembler loading area when you submit a built bot
     $("#assemblerArea").on("click", "#assembleButton", function(){
       $("#assemblerArea").children("div").children("img").attr("src", "/assets/images/unknown.jpeg");
       alert('Not implemented yet!');
     });
 
+    //Delegation for general logging and and out
+
+   //Calls a function to set username, and set loggedin to true
     $("body").on("click", "#btnLogin", function(){
       var username = $(this).siblings('input').val();
 
@@ -61,6 +72,7 @@ $(document).ready(function(){
 
     });
 
+    //Calls a function to de-set username, and set loggedin to false
     $("body").on("click", "#btnLogout", function(){
       $.ajax({
         url: "/logout",
@@ -77,6 +89,7 @@ $(document).ready(function(){
       });
     });
 
+    //Delegation for selecting different portfolios via dropdown
 
     $("#body").on("change", "#selectPortfolio", function(){
       var selectedUser = $(this).children(":selected").val();
