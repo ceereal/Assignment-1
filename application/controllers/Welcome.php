@@ -24,7 +24,8 @@ class Welcome extends Application {
 
 			foreach($players as $player) {
 				$equity = $this->collections->get_player_equity($player['Player']);
-				$table .= "<div><a href='/portfolio/" . $player['Player'] . "'>Player " . $player['Player'] . "</a> has equity of " . $equity . " peanuts</div>";
+				$peanuts = $this->collections->get_player_peanuts($player['Player']);
+				$table .= "<div><a href='/portfolio/" . $player['Player'] . "'>Player " . $player['Player'] . "</a>: Equity: " . ($equity + $peanuts) . ", Peanuts: " . $peanuts . "</div>";
 			}
 
 
