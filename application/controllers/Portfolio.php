@@ -25,8 +25,8 @@ class Portfolio extends Application {
 
                     foreach($collection as $row){
 											$currentRow = "<div class='botpiece'>" .
-																		"<img src='/assets/images/" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . ".jpeg' alt='Bot piece'>" .
-																		"<div class='botsubtitle'>" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . "</div>" .
+																		"<img src='/assets/images/" . $row['piece'] . ".jpeg' alt='Bot piece'>" .
+																		"<div class='botsubtitle'>" . $row['piece'] . "</div>" .
 																		"</div>";
 
 
@@ -36,7 +36,7 @@ class Portfolio extends Application {
                     $this->data['inventory_table'] = '<h3>Collection of Bots: </h3>' . $table1;
 
                     foreach($transaction as $row){
-									  	switch ($row['Trans']){
+									  	switch ($row['trans']){
 												case "sell":
 													$currentVerb = "sold";
 													break;
@@ -46,7 +46,7 @@ class Portfolio extends Application {
 												default:
 													$currentVerb = "DEFAULT";
 											}
-						$table2 .= '<div>' . $row['Player'] . ' ' . $currentVerb . ' a series ' . $row['Series'] . ' at ' . $row['DateTime'] . '<br></div>';
+						$table2 .= '<div>' . $row['player'] . ' ' . $currentVerb . ' a series ' . $row['series'] . ' at ' . $row['datetime'] . '<br></div>';
                     }
 
                     $this->data['activity_feed'] = '<h3>Activity Feed: </h3>' . $table2;

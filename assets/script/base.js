@@ -9,23 +9,24 @@ $(document).ready(function(){
   //Ideally would also store the token as an attribute for later verification (for next assignment)
   $("#assemblerInventory").on("click", ".botpiece", function(){
         var token = $(this).attr("data-token");
-        console.log(token);
         $.ajax({
           url: "/get_collection_by_token",
           type: 'POST',
           data: ("token=" + token),
           dataType: 'json',
           success: function(data) {
+              console.log(data);
               if(data.message == "success"){
-                switch (data.CardPosition){
+                type = (data.piece).split("-")[1]; //gets the last part, after the '-' of the returned piece
+                switch (type){
                   case "0":
-                    $("#headPiece > img").attr("src", "/assets/images/" + data.Series + data.SubSeries + "-" + data.CardPosition + ".jpeg");
+                    $("#headPiece > img").attr("src", "/assets/images/" + data.piece + ".jpeg");
                     break;
                   case "1":
-                    $("#midPiece > img").attr("src", "/assets/images/" + data.Series + data.SubSeries + "-" + data.CardPosition + ".jpeg");
+                    $("#midPiece > img").attr("src", "/assets/images/" + data.piece + ".jpeg");
                     break;
                   case "2":
-                    $("#legPiece > img").attr("src", "/assets/images/" + data.Series + data.SubSeries + "-" + data.CardPosition + ".jpeg");
+                    $("#legPiece > img").attr("src", "/assets/images/" + data.piece + ".jpeg");
                     break;
                   default:
                     break;
@@ -34,7 +35,10 @@ $(document).ready(function(){
               else{
                 alert("That is not your piece!");
               }
-          }
+          },
+          error: function (jqXHR, textStatus, errorThrown){
+			alert('Error with the connection: ' + textStatus + " " + errorThrown);
+        }
         });
     });
 
