@@ -12,13 +12,21 @@ class Registration extends Application {
 	public function index()
 	{
 
-
 		$this->data['pagebody'] = 'Registration'; //setting view to use
 		$this->data['title'] = 'Bot Card Collector'; //Changing nav bar to show page title
 
-
 		$this->Render();
 		//$this->findCardSet();
+
+	}
+
+	public function signup(){
+
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+
+		$this->players->create_player($username, $password);
+		redirect('/');
 
 	}
 
