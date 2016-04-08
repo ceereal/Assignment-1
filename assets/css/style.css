@@ -66,7 +66,7 @@ h3 {
     overflow: hidden;
 }
 
-.playerInventory, #GameStatus {
+.playerInventory, #GameStatus, #registration {
     float:left;
     margin-left: 5%;
     width:50%;
@@ -148,3 +148,25 @@ width:100px;
 }
 
 /* -------------- End of Assembly -------------- */
+
+
+/* -------------- Start of Registration -------------- */
+
+#registration{
+        width:30%;
+}
+
+
+#registration  div{
+    display:flex;
+    justify-content: space-between;
+}
+#registration input{
+    width:60%;
+}
+
+#registration input[type='submit']{
+    width:30%;
+}
+
+/* -------------- End of Registration -------------- */
