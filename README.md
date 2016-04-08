@@ -1,6 +1,6 @@
-# Assignment-1
+# Assignment-2
 
-This is the repository for our Assignment part one.
+This is the repository for our Assignment part two, built off the first one
 
 # Group Members
 
@@ -19,4 +19,3 @@ Brackets to be on different levels eg {
 Using spaces, not tabs
 
 Controller files to be capatalised
-
