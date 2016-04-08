@@ -15,7 +15,12 @@ class Admin extends Application {
 		$this->data['pagebody'] = 'Admin'; //setting view to use
 		$this->data['title'] = 'Bot Card Collector Admin'; //Changing nav bar to show page title
 
-
+		if($this->status->get_state == "2"){
+			$this->data['registerButton'] = "<input type='submit' value='Register App'/>"
+		}
+		else{
+			$this->data['registerButton'] = "<div class='button'>Cannot register yet!</div>";
+		}
 		//Setting all the created data to their appropriate placeholders
 		$this->data['tableData'] = ""; //TODO: list players, using view fragment
 		$this->Render();
@@ -23,4 +28,7 @@ class Admin extends Application {
 
 	}
 
+	public function register(){
+
+	}
 }

@@ -13,10 +13,36 @@ class Welcome extends Application {
 	{
 
 		//Setting up the game status
-		$gameStatus = '<h1>Game is <b>ACTIVE!</b></h1>';
+		$status = $this->status->all();
+		if($status->round == ""){
+			$status->round == "0";
+		}
+		//changes the display for the current game status
+		switch($status->state){
+			case(0) :
+				$gameStatus = "<h1>Game is closed</h1>";
+				break;
+
+			case(1):
+				$gameStatus = "<h1>Game is setting up.</h1>";
+				break;
+
+			case(2):
+				$gameStatus = "<h1>Game is ready to go, get registered, market opens in: " . $status->countdown . " seconds</h1>";
+				break;
+
+			case(3):
+				$gameStatus = "<h1>Game is active!</h1>";
+				break;
+
+			case(4):
+				$gameStatus = "<h1>Game has concluded it's round</h1>";
+				break;
+		}
+		$gameStatus .= "<h2>Round number: " . $status->round . "</h2>";
 
 		//Code to print out all known series with values and descriptions
-		 $series = $this->series->all();
+		$series = $this->series->all();
 		$seriesCollection = "<h3>Known Series: </h3>";
 		foreach($series as $row){
 			$seriesCollection .= "<div>Series " . $row['code'] . ": " . $row['description'] . ", with a value of " . $row['value'] ." peanuts</div>";
