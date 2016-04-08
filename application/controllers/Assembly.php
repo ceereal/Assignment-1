@@ -25,9 +25,9 @@ class Assembly extends Application {
 				$table = "";
 				$collection = $this->collections->collection_by_player($_SESSION['username']);
 				foreach($collection as $row){
-					$currentRow = "<div class='botpiece' data-token='" . $row['Token'] . "'>" .
-												"<img src='/assets/images/" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . ".jpeg' alt='Bot piece'>" .
-												"<div class='botsubtitle'>" . $row['Series'] . $row['SubSeries'] . "-" . $row['CardPosition'] . "</div>" .
+					$currentRow = "<div class='botpiece' data-token='" . $row['token'] . "'>" .
+												"<img src='/assets/images/" . $row['piece'] . ".jpeg' alt='Bot piece'>" .
+												"<div class='botsubtitle'>" . $row['piece'] . "</div>" .
 												"</div>";
 					$table .= $currentRow;
 				}
@@ -52,9 +52,11 @@ class Assembly extends Application {
 	public function get_collection_by_token(){
 		session_start();
 		$pieceToken = $this->input->post('token', TRUE);
-		$currentPiece = $this->collections->collection_by_token($pieceToken);
 
-		if($currentPiece['Player'] == $_SESSION['username']){
+		$currentPiece = $this->collections->collection_by_token($pieceToken);
+		$currentPiece = array_shift($currentPiece);
+
+		if($currentPiece['player'] == $_SESSION['username']){
 			$currentPiece['message'] = 'success';
 			echo json_encode($currentPiece, JSON_FORCE_OBJECT);
 		}
