@@ -53,11 +53,11 @@ class Welcome extends Application {
 
 		//Code to create a list of all the players and their status (peanuts and equity)
 		$list = "";
-		$players = $this->collections->get_players();
+		$players = $this->players->all();
 		foreach($players as $player) {
-			$equity = $this->collections->get_player_equity($player);
-			$peanuts = $this->players->get_player_peanuts($player);
-			$list .= "<div><a href='/portfolio/" . $player . "'>Player " . $player . "</a>: Equity: " . ($equity + $peanuts) . ", Peanuts: " . $peanuts . "</div>";
+			$equity = $this->collections->get_player_equity($player["player"]);
+			$peanuts = $this->players->get_player_peanuts($player["player"]);
+			$list .= "<div><a href='/portfolio/" . $player["player"] . "'>Player " . $player["player"] . "</a>: Equity: " . ($equity + $peanuts) . ", Peanuts: " . $peanuts . "</div>";
 		}
 
 		//Setting all the created data to their appropriate placeholders

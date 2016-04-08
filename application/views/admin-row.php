@@ -10,8 +10,6 @@
     </td>
 
     <td>
-        <form action="/Admin/Adminifiy/{player}" method="POST">
-            <input type="submit" value="Make Admin"/>
-        </form>
+        {admin}
     </td>
 </tr>

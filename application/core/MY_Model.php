@@ -83,7 +83,7 @@ class MY_Model extends CI_Model {
 				$count++;
 			}
 			if(!ISSET($return)){
-				$return = $field;
+				$return = "";
 			}
 		}
 		fclose($handle);

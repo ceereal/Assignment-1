@@ -57,12 +57,14 @@ $(document).ready(function(){
 
    //Calls a function to set username, and set loggedin to true
     $("body").on("click", "#btnLogin", function(){
-      var username = $(this).siblings('input').val();
+      var username = $("#inputUsername").val();
+      var password = $("#inputPass").val();
+
 
       $.ajax({
         url: "/login",
         type: 'POST',
-        data: ("username=" + username),
+        data: ("username=" + username + "&password=" + password),
         dataType: 'text',
         success: function(data) {
           console.log(data);
