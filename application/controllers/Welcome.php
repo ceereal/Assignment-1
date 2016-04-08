@@ -19,7 +19,7 @@ class Welcome extends Application {
 		$series = $this->series->all();
 		$seriesCollection = "<h3>Known Series: </h3>";
 		foreach($series as $row){
-			$seriesCollection .= "<div>Series " . $row['Series'] . ": " . $row['Description'] . ", with a value of " . $row['Value'] ." peanuts</div>";
+			$seriesCollection .= "<div>Series " . $row['code'] . ": " . $row['description'] . ", with a value of " . $row['value'] ." peanuts</div>";
 		}
 
 		$this->data['pagebody'] = 'Welcome'; //setting view to use

@@ -11,6 +11,8 @@ class Collections extends CI_Model {
 	//Returns all collected robots in descending order by post date
 	// Where clause removes header row
 	function all(){
+
+
 		$query = $this->db->query(" SELECT Series,
 									SUBSERIES,
 									CardPosition,
@@ -18,6 +20,8 @@ class Collections extends CI_Model {
 									Token,
 									Datetime
 									FROM collections ORDER BY Datetime DESC;");
+
+
 
 		return $query->result_array();
 	}
