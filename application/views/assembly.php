@@ -2,6 +2,12 @@
 	{inventory_table}
 </div>
 
+<div id="buyBotContainer">
+	<form action="/Assembly/buy_bot">
+		<input type="submit" value="Buy new bots!"/>
+	</form>
+</div>
+
 <div id="assemblerArea">
 	<h3>Assembly Area:</h3>
 	<div class="assemblerPiece" id="headPiece">

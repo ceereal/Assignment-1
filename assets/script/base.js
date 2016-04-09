@@ -10,7 +10,7 @@ $(document).ready(function(){
   $("#assemblerInventory").on("click", ".botpiece", function(){
         var token = $(this).attr("data-token");
         $.ajax({
-          url: "/get_collection_by_token",
+          url: "/Assembly/select_bot",
           type: 'POST',
           data: ("token=" + token),
           dataType: 'json',
