@@ -32,9 +32,9 @@ class Players extends CI_Model {
 		return $query;
 	}
 
-	function create_player($player, $password){
+	function create_player($player, $password, $avatarURI){
 		$passEncrypt = password_hash($password, PASSWORD_DEFAULT);
-		$query = $this->db->query("INSERT INTO players (player, password) VALUES ('$player', '$passEncrypt')");
+		$query = $this->db->query("INSERT INTO players (player, password, avatarURI) VALUES ('$player', '$passEncrypt', '$avatarURI')");
 		return $query;
 	}
 

@@ -138,7 +138,6 @@ class Admin extends Application {
 	}
 
 	public function Adminify($playerName){
-		session_start();
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				if($this->players->get_player_admin($_SESSION['username'])){
@@ -151,7 +150,6 @@ class Admin extends Application {
 	}
 
 	public function Delete($playerName){
-		session_start();
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				if($this->players->get_player_admin($_SESSION['username'])){
