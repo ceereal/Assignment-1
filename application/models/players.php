@@ -27,6 +27,11 @@ class Players extends CI_Model {
 		return $value[0]['peanuts'];
 	}
 
+	function set_player_peanuts($playerName, $peanuts){
+		$query = $this->db->query("UPDATE players SET peanuts = $peanuts WHERE player = '$playerName';");
+		return $query;
+	}
+
 	function create_player($player, $password){
 		$passEncrypt = password_hash($password, PASSWORD_DEFAULT);
 		$query = $this->db->query("INSERT INTO players (player, password) VALUES ('$player', '$passEncrypt')");
