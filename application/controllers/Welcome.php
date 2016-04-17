@@ -58,6 +58,7 @@ class Welcome extends Application {
 			$equity = $this->collections->get_player_equity($player["player"]);
 			$peanuts = $this->players->get_player_peanuts($player["player"]);
 			$list .= "<div class='playerContainer'>";
+			$list .= "<div class='playerPortfolio'><img src='" . $player["avatarURI"] . "' alt='avatar'></div>";
 			$list .= "<div class='playerLink'><a href='/portfolio/" . $player["player"] . "'>Player " . $player["player"] . "</a>: Equity: " . ($equity + $peanuts) . ", Peanuts: " . $peanuts . "</div>";
 			$trans = $this->transactions->transactions_by_player($player["player"]);
 			if($trans != null){

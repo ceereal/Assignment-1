@@ -25,7 +25,12 @@ class Collections extends MY_Model {
 	function get_player_equity($playerName){
 		$name = strtolower($playerName);
 		$return = $this->get_limited("player", $name);
-		$value = count($return);
+		if($return != ""){
+			$value = count($return);
+		}
+		else{
+			$value = 0;
+		}
 		return $value;
 	}
 

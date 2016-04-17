@@ -2,6 +2,9 @@
 
 This is the repository for our Assignment part two, built off the first one
 
+Admin account:  admin
+Admin password: admin
+
 # Group Members
 
 Group members include:
@@ -43,5 +46,6 @@ Controller files to be capatalised
 
     Ceereal (Celia):
         Adding buy/sell functionality
+        Adding avatars
         Fix up other pages (CSS)
-        Final fixes
+        Final fixes! 

@@ -24,7 +24,7 @@ class Registration extends Application {
 		$password = $this->input->post('password', TRUE);
 
 		$config['upload_path'] = './assets/uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']	= '100';
 		$config['max_width']  = '256';
 		$config['max_height']  = '256';

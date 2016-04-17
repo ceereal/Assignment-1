@@ -138,18 +138,23 @@ class Admin extends Application {
 	}
 
 	public function Adminify($playerName){
+		session_start();
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				if($this->players->get_player_admin($_SESSION['username'])){
 					$this->players->adminify_player($playerName);
+
 				}
 			}
+
 		}
+		session_write_close();
 		$this->index();
 
 	}
 
 	public function Delete($playerName){
+		session_start();
 		if(isset($_SESSION['loggedIn']) && isset($_SESSION['username'])){
 			if($_SESSION['loggedIn'] == true){
 				if($this->players->get_player_admin($_SESSION['username'])){
@@ -157,6 +162,7 @@ class Admin extends Application {
 				}
 			}
 		}
+		session_write_close();
 		$this->index();
 	}
 }

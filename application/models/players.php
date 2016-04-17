@@ -11,7 +11,7 @@ class Players extends CI_Model {
 	//Returns all players
 	//Where clause removes header row
 	function all(){
-		$query = $this->db->query("SELECT player, peanuts, admin FROM players;");
+		$query = $this->db->query("SELECT player, peanuts, admin, avatarURI FROM players;");
 		return $query->result_array();
 	}
 
